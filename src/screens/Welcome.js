@@ -14,7 +14,7 @@ const { width, height } = Dimensions.get("window");
 import { LinearGradient } from 'expo-linear-gradient';
 import { Text } from "react-native-elements";
 
-export default function Welcome() {
+export default function Welcome({ navigation }) {
 
     const [sliderState, setSliderState] = useState({ currentPage: 0 });
 
@@ -99,7 +99,7 @@ export default function Welcome() {
             <Text style={{ color: '#FFF', textAlign: 'center' }}>Create a new wallet</Text>
         </LinearGradient>
       </TouchableOpacity>
-      <TouchableOpacity style={{ paddingVertical: 12, }}>
+      <TouchableOpacity style={{ paddingVertical: 12, }} onPress={() => { navigation.navigate("LoginHome"); }} >
           <Text style={{ textAlign: 'center', color: '#e234e3', fontWeight: 'bold', }}>I already have a wallet</Text>
       </TouchableOpacity>
       </View>
