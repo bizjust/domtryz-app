@@ -9,13 +9,14 @@ import LoginHome from "./src/screens/auth/login/LoginHome";
 import LoginEmail from "./src/screens/auth/login/LoginEmail";
 import LoginPhone from "./src/screens/auth/login/LoginPhone";
 import HomeScreen from "./src/screens/HomeScreen";
+import SearchCoin from "./src/screens/send/SearchCoin";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="HomeScreen" >
         <Stack.Screen
           name="Welcome"
           options={{ headerShown: false }}
@@ -40,6 +41,11 @@ export default function App() {
           name="HomeScreen"
           options={{ headerShown: false }}
           component={HomeScreen}
+        />
+        <Stack.Screen
+          name="SearchCoin"
+          options={{ headerShown: false }}
+          component={SearchCoin}
         />
         {/* <StatusBar style="auto" /> */}
       </Stack.Navigator>
