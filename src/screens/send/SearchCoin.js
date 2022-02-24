@@ -3,13 +3,12 @@ import {
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from "react-native";
 import React, { useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import { Avatar, Icon, ListItem } from "react-native-elements";
+import { Avatar, Icon, ListItem, Text } from "react-native-elements";
 const { width, height } = Dimensions.get("window");
 
 export default function SearchCoin({ navigation, params }) {
@@ -67,7 +66,7 @@ export default function SearchCoin({ navigation, params }) {
   ];
 
   return (
-    <View>
+    <View style={{ flex:1, }}>
       <LinearGradient
         // Button Linear Gradient
         style={{ width: width, paddingVertical: 30, paddingHorizontal: 10 }}
@@ -85,10 +84,10 @@ export default function SearchCoin({ navigation, params }) {
               navigation.goBack();
             }}
           >
-            <Icon type="font-awesome" name="long-arrow-left" color={"#FFF"} />
+            <Icon type="ant-design" name="arrowleft" color={"#FFF"} />
           </TouchableOpacity>
           <View>
-            <Text style={{ color: "#FFF" }}>Search Coin</Text>
+            <Text style={{ color: "#FFF" }} h4>Search Coin</Text>
           </View>
           <View></View>
         </View>
@@ -96,7 +95,7 @@ export default function SearchCoin({ navigation, params }) {
       <ScrollView>
         <View>
           {list.map((l, i) => (
-            <ListItem key={i} bottomDivider>
+            <ListItem key={i} bottomDivider onPress={()=>{ navigation.navigate("SendBTC"); }} >
               <Avatar source={l.avatar} />
               <ListItem.Content>
                 <ListItem.Title>{l.name}</ListItem.Title>
@@ -107,7 +106,7 @@ export default function SearchCoin({ navigation, params }) {
           ))}
         </View>
       </ScrollView>
-      <StatusBar style="auto" />
+      <StatusBar style="auto" backgroundColor={"#e234e3"} />
     </View>
   );
 }

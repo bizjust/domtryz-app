@@ -10,6 +10,18 @@ import LoginEmail from "./src/screens/auth/login/LoginEmail";
 import LoginPhone from "./src/screens/auth/login/LoginPhone";
 import HomeScreen from "./src/screens/HomeScreen";
 import SearchCoin from "./src/screens/send/SearchCoin";
+import SendBTC from "./src/screens/send/SendBTC";
+import ScanQR from "./src/screens/send/ScanQR";
+import SentBTC from "./src/screens/send/SentBTC";
+import SearchReceive from "./src/screens/receive/SearchReceive";
+import ReceiveBTC from "./src/screens/receive/ReceiveBTC";
+import SearchBuy from "./src/screens/buy/SearchBuy";
+import BuyBTC from "./src/screens/buy/BuyBTC";
+import Providers from "./src/screens/buy/Providers";
+import BuyWebView from "./src/screens/buy/BuyWebView";
+import BuyBTCSuccess from "./src/screens/buy/BuyBTCSuccess";
+import Plans from "./src/screens/investment/Plans";
+import PlanDetails from "./src/screens/investment/PlanDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -46,6 +58,66 @@ export default function App() {
           name="SearchCoin"
           options={{ headerShown: false }}
           component={SearchCoin}
+        />
+        <Stack.Screen
+          name="SendBTC"
+          options={{ headerShown: false }}
+          component={SendBTC}
+        />
+        <Stack.Screen
+          name="ScanQR"
+          options={{ headerShown: false }}
+          component={ScanQR}
+        />
+        <Stack.Screen
+          name="SentBTC"
+          options={{ headerShown: false }}
+          component={SentBTC}
+        />
+        <Stack.Screen
+          name="SearchReceive"
+          options={{ headerShown: false }}
+          component={SearchReceive}
+        />
+        <Stack.Screen
+          name="ReceiveBTC"
+          options={{ headerShown: false }}
+          component={ReceiveBTC}
+        />
+        <Stack.Screen
+          name="SearchBuy"
+          options={{ headerShown: false }}
+          component={SearchBuy}
+        />
+        <Stack.Screen
+          name="BuyBTC"
+          options={{ headerShown: false }}
+          component={BuyBTC}
+        />
+        <Stack.Screen
+          name="Providers"
+          options={{ headerShown: false }}
+          component={Providers}
+        />
+        <Stack.Screen
+          name="BuyWebView"
+          options={{ headerShown: false }}
+          component={BuyWebView}
+        />
+        <Stack.Screen
+          name="BuyBTCSuccess"
+          options={{ headerShown: false }}
+          component={BuyBTCSuccess}
+        />
+        <Stack.Screen
+          name="Plans"
+          options={{ headerShown: false }}
+          component={Plans}
+        />
+        <Stack.Screen
+          name="PlanDetails"
+          options={{ headerShown: false }}
+          component={PlanDetails}
         />
         {/* <StatusBar style="auto" /> */}
       </Stack.Navigator>

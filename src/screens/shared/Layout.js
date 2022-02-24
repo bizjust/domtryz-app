@@ -85,7 +85,7 @@ export default function Layout({children, navigation}) {
             <Text style={{ textAlign: 'center', color: '#FFF', }}>Send</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={()=>{ navigation.navigate("SearchReceive"); }} >
             <LinearGradient
               // Button Linear Gradient
               style={{
@@ -104,7 +104,7 @@ export default function Layout({children, navigation}) {
             <Text style={{ textAlign: 'center', color: '#FFF', }}>Receive</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={()=>{ navigation.navigate("SearchBuy"); }} >
             <LinearGradient
               // Button Linear Gradient
               style={{
@@ -123,7 +123,7 @@ export default function Layout({children, navigation}) {
             <Text style={{ textAlign: 'center', color: '#FFF', }}>Buy</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center' }} onPress={()=>{ navigation.navigate("Plans"); }}>
             <LinearGradient
               // Button Linear Gradient
               style={{
@@ -180,7 +180,7 @@ export default function Layout({children, navigation}) {
           <Text style={styles.tabsText}>Settings</Text>
         </TouchableOpacity>
       </View>
-      <StatusBar style="auto" />
+      <StatusBar style="auto" backgroundColor={"#e234e3"} />
     </LinearGradient>
   );
 }
