@@ -16,6 +16,7 @@ import {
   Input,
   LinearProgress,
   ListItem,
+  Overlay,
   Text,
 } from "react-native-elements";
 const { width, height } = Dimensions.get("window");
@@ -29,6 +30,8 @@ import {
 } from "react-native-chart-kit";
 
 export default function PlanDetails({ route, navigation }) {
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
     console.log(route.params);
   }, []);
@@ -152,37 +155,98 @@ export default function PlanDetails({ route, navigation }) {
               colors={["#e234e3", "#3e3477"]}
             >
               <View>
-                <Text style={{ color: "#FFF" }}>Plan Jan 2022</Text>
-                <Text style={{ color: "#FFF" }} h4>
-                  Completed 10%
-                </Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <View>
+                    <Text style={{ color: "#FFF" }}>Plan Jan 2022</Text>
+                    <Text style={{ color: "#FFF" }} h4>
+                      Completed 10%
+                    </Text>
+                  </View>
+                  <View>
+                    <TouchableOpacity
+                      onPress={() => {
+                        setShowModal(!showModal);
+                      }}
+                    >
+                      <Text
+                        style={{
+                          color: "#FFF",
+                          textDecorationLine: "underline",
+                        }}
+                      >
+                        View Details
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 50, }}>
-                  <View style={{ width:100, }}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    paddingTop: 50,
+                  }}
+                >
+                  <View style={{ width: 100 }}>
                     <LinearProgress
                       color="primary"
                       variant="determinate"
                       value={0.85}
                       trackColor="#FFF"
-                      style={{ height: 10, borderRadius: 20, }}
+                      style={{ height: 10, borderRadius: 20 }}
                     />
-                    <Text style={{ textAlign: 'center', color: '#FFF', }}>Tasks 85%</Text>
+                    <Text style={{ textAlign: "center", color: "#FFF" }}>
+                      Tasks 85%
+                    </Text>
                   </View>
-                  <View style={{ width:100, }}>
+                  <View style={{ width: 100 }}>
                     <LinearProgress
                       color="pink"
                       variant="determinate"
-                      value={0.40}
+                      value={0.4}
                       trackColor="#FFF"
-                      style={{ height: 10, borderRadius: 20, }}
+                      style={{ height: 10, borderRadius: 20 }}
                     />
-                    <Text style={{ textAlign: 'center', color: '#FFF', }}>Report 40%</Text>
+                    <Text style={{ textAlign: "center", color: "#FFF" }}>
+                      Report 40%
+                    </Text>
                   </View>
                 </View>
               </View>
             </LinearGradient>
           </View>
         </View>
+
+        <Overlay
+          isVisible={showModal}
+          onBackdropPress={() => {
+            setShowModal(false);
+          }}
+          overlayStyle={{ borderRadius: 20, width: width - 40, alignItems: 'center', paddingTop: 40, }}
+        >
+            <View>
+            <Icon
+                type="material-community"
+                name="checkbox-marked-circle"
+                color={"#e234e3"}
+                size={100}
+            />
+            </View>
+          <View style={{ borderBottomColor: '#CCC', borderBottomWidth: 1, width: width - 40, alignItems: 'center', paddingVertical: 20, }}>
+          <Text h2>$10.00<Text style={{ marginBottom: 7, fontSize: 18, color: '#999' }}>USD</Text></Text>
+          <Text style={{ color: '#999' }}>10 October 2022, 23.59</Text>
+          </View>
+          <View style={{ flexDirection: 'row', paddingVertical: 10, }}>
+              <Icon type="font-awesome" name="star" color={"#e234e3"} raised reverse />
+              <Icon type="font-awesome" name="refresh" color={"#e234e3"} raised />
+              <Icon type="material-community" name="share-variant" color={"#e234e3"} raised />
+          </View>
+        </Overlay>
       </ScrollView>
     </View>
   );
