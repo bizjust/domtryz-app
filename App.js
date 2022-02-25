@@ -22,6 +22,11 @@ import BuyWebView from "./src/screens/buy/BuyWebView";
 import BuyBTCSuccess from "./src/screens/buy/BuyBTCSuccess";
 import Plans from "./src/screens/investment/Plans";
 import PlanDetails from "./src/screens/investment/PlanDetails";
+import PlanConfirmation from "./src/screens/investment/PlanConfirmation";
+import Withdraw from "./src/screens/withdraw/Withdraw";
+import ConfirmAddress from "./src/screens/withdraw/ConfirmAddress";
+import WithdrawConfirmation from "./src/screens/withdraw/WithdrawConfirmation";
+import Settings from "./src/screens/settings/Settings";
 
 const Stack = createNativeStackNavigator();
 
@@ -118,6 +123,31 @@ export default function App() {
           name="PlanDetails"
           options={{ headerShown: false }}
           component={PlanDetails}
+        />
+        <Stack.Screen
+          name="PlanConfirmation"
+          options={{ headerShown: false }}
+          component={PlanConfirmation}
+        />
+        <Stack.Screen
+          name="Withdraw"
+          options={{ headerShown: false }}
+          component={Withdraw}
+        />
+        <Stack.Screen
+          name="ConfirmAddress"
+          options={{ headerShown: false }}
+          component={ConfirmAddress}
+        />
+        <Stack.Screen
+          name="WithdrawConfirmation"
+          options={{ headerShown: false }}
+          component={WithdrawConfirmation}
+        />
+        <Stack.Screen
+          name="Settings"
+          options={{ headerShown: false }}
+          component={Settings}
         />
         {/* <StatusBar style="auto" /> */}
       </Stack.Navigator>

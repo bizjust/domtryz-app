@@ -31,6 +31,7 @@ import {
 
 export default function PlanDetails({ route, navigation }) {
   const [showModal, setShowModal] = useState(false);
+  const [activeBtn, setActiveBtn] = useState("");
 
   useEffect(() => {
     console.log(route.params);
@@ -242,9 +243,15 @@ export default function PlanDetails({ route, navigation }) {
           <Text style={{ color: '#999' }}>10 October 2022, 23.59</Text>
           </View>
           <View style={{ flexDirection: 'row', paddingVertical: 10, }}>
-              <Icon type="font-awesome" name="star" color={"#e234e3"} raised reverse />
-              <Icon type="font-awesome" name="refresh" color={"#e234e3"} raised />
-              <Icon type="material-community" name="share-variant" color={"#e234e3"} raised />
+              <TouchableOpacity onPress={()=>{ setActiveBtn("star"); navigation.navigate("PlanConfirmation");  }}>
+                <Icon type="font-awesome" name="star" color={"#e234e3"} raised reverse={activeBtn==="star"} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>{ setActiveBtn("refresh"); }}>
+              <Icon type="font-awesome" name="refresh" color={"#e234e3"} raised reverse={activeBtn==="refresh"} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>{ setActiveBtn("share"); }}>
+              <Icon type="material-community" name="share-variant" color={"#e234e3"} raised reverse={activeBtn==="share"} />
+              </TouchableOpacity>
           </View>
         </Overlay>
       </ScrollView>

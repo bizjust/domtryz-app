@@ -171,11 +171,11 @@ export default function Layout({children, navigation}) {
           <Icon type="fontisto" name="wallet" size={50} color="#e234e3" />
           <Text style={styles.tabsText}>Wallet</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ alignItems: "center", width: width / 6 }}>
+        <TouchableOpacity style={{ alignItems: "center", width: width / 6 }} onPress={()=>{ navigation.navigate("Withdraw"); }} >
           <Icon type="material-community" name="credit-card-check" />
           <Text style={styles.tabsText}>Withdraw</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ alignItems: "center", width: width / 6 }}>
+        <TouchableOpacity style={{ alignItems: "center", width: width / 6 }} onPress={()=>{ navigation.navigate("Settings"); }}>
           <Icon type="material-community" name="cog" />
           <Text style={styles.tabsText}>Settings</Text>
         </TouchableOpacity>
