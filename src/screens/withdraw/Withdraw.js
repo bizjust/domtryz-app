@@ -147,33 +147,103 @@ export default function Withdraw({ navigation }) {
 
           <View
             style={{
-              backgroundColor: "#FFF",
-              alignItems: "center",
-              justifyContent: "center",
-              width: 150,
-              height: 150,
-              borderRadius: 10,
-              marginTop: 10,
+              flexDirection: "row",
+              justifyContent: "space-between",
+              width: width - 40,
             }}
           >
-            <Badge
-              status="primary"
-              badgeStyle={{
-                width: 45,
-                height: 45,
-                borderRadius: 8,
-                backgroundColor: "#E3F3FF",
+            <View
+              style={{
+                backgroundColor: "#FFF",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 100,
+                height: 130,
+                borderRadius: 10,
+                marginTop: 10,
               }}
-              value={
-                <Badge
-                  status="primary"
-                  value={<Text style={{ color: "#FFF" }}>P</Text>}
-                  badgeStyle={{ borderRadius: 5, width: 30, height: 30 }}
-                />
-              }
-            />
-            <Text style={{ marginVertical: 10 }}>Pending</Text>
-            <Text>$10,000.00</Text>
+            >
+              <Badge
+                status="primary"
+                badgeStyle={{
+                  width: 45,
+                  height: 45,
+                  borderRadius: 8,
+                  backgroundColor: "#E3F3FF",
+                }}
+                value={
+                  <Badge
+                    status="primary"
+                    value={<Text style={{ color: "#FFF" }}>P</Text>}
+                    badgeStyle={{ borderRadius: 5, width: 30, height: 30 }}
+                  />
+                }
+              />
+              <Text style={{ marginVertical: 10 }}>Pending</Text>
+              <Text>$10,000.00</Text>
+            </View>
+
+            <View
+              style={{
+                backgroundColor: "#FFF",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 100,
+                height: 130,
+                borderRadius: 10,
+                marginTop: 10,
+              }}
+            >
+              <Badge
+                status="primary"
+                badgeStyle={{
+                  width: 45,
+                  height: 45,
+                  borderRadius: 8,
+                  backgroundColor: "#FFEFED",
+                }}
+                value={
+                  <Badge
+                    status="primary"
+                    value={<Text style={{ color: "#FFF" }}>A</Text>}
+                    badgeStyle={{ borderRadius: 5, width: 30, height: 30, backgroundColor: '#EB5757' }}
+                  />
+                }
+              />
+              <Text style={{ marginVertical: 10 }}>Available</Text>
+              <Text>$10,000.00</Text>
+            </View>
+
+            <View
+              style={{
+                backgroundColor: "#FFF",
+                alignItems: "center",
+                justifyContent: "center",
+                width: 100,
+                height: 130,
+                borderRadius: 10,
+                marginTop: 10,
+              }}
+            >
+              <Badge
+                status="primary"
+                badgeStyle={{
+                  width: 45,
+                  height: 45,
+                  borderRadius: 8,
+                  backgroundColor: "#FFF2E2",
+                }}
+                value={
+                  <Badge
+                    status="primary"
+                    value={<Text style={{ color: "#FFF" }}>I</Text>}
+                    badgeStyle={{ borderRadius: 5, width: 30, height: 30, backgroundColor: '#F0984A' }}
+                  />
+                }
+              />
+              <Text style={{ marginVertical: 10 }}>In Process</Text>
+              <Text>$10,000.00</Text>
+            </View>
           </View>
           <View style={{ paddingVertical: 10, alignItems: "center" }}>
             <Text>Amount</Text>
@@ -187,8 +257,8 @@ export default function Withdraw({ navigation }) {
                 value={value}
                 minimumValue={0}
                 maximumValue={10000}
-                minimumTrackTintColor="#3e3477"
-                maximumTrackTintColor="#3e3477"
+                minimumTrackTintColor="#7B68EE"
+                maximumTrackTintColor="#7B68EE"
                 thumbTintColor="#e234e3"
               />
             </View>
@@ -341,7 +411,11 @@ export default function Withdraw({ navigation }) {
             </View>
 
             <View style={{ alignItems: "center", paddingVertical: 10 }}>
-              <TouchableOpacity onPress={()=>{ navigation.navigate("ConfirmAddress"); }}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate("ConfirmAddress");
+                }}
+              >
                 <LinearGradient
                   // Button Linear Gradient
                   style={{
