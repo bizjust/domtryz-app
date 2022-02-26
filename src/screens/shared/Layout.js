@@ -19,6 +19,7 @@ import {
   ProgressChart,
   ContributionGraph,
 } from "react-native-chart-kit";
+import BottomTabs from "./BottomTabs";
 
 export default function Layout({children, navigation}) {
   const data = {
@@ -144,42 +145,7 @@ export default function Layout({children, navigation}) {
         </View>
       </View>
       {children}
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          backgroundColor: "#FFF",
-          position: "absolute",
-          bottom: 0,
-          width: width,
-          paddingHorizontal: 10,
-          borderTopWidth: 1,
-          borderTopColor: "#e0e0e0",
-          paddingVertical: 5,
-        }}
-      >
-        <TouchableOpacity style={{ alignItems: "center", width: width / 6 }}>
-          <Icon type="material-community" name="clock" />
-          <Text style={styles.tabsText}>Activity</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ alignItems: "center", width: width / 6 }}>
-          <Icon type="material-community" name="chart-line-stacked" />
-          <Text style={styles.tabsText}>Prices</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ alignItems: "center" }}>
-          <Icon type="fontisto" name="wallet" size={50} color="#e234e3" />
-          <Text style={styles.tabsText}>Wallet</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ alignItems: "center", width: width / 6 }} onPress={()=>{ navigation.navigate("Withdraw"); }} >
-          <Icon type="material-community" name="credit-card-check" />
-          <Text style={styles.tabsText}>Withdraw</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={{ alignItems: "center", width: width / 6 }} onPress={()=>{ navigation.navigate("Settings"); }}>
-          <Icon type="material-community" name="cog" />
-          <Text style={styles.tabsText}>Settings</Text>
-        </TouchableOpacity>
-      </View>
+      <BottomTabs navigation={navigation} />
       <StatusBar style="auto" backgroundColor={"#e234e3"} />
     </LinearGradient>
   );

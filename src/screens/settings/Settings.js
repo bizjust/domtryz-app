@@ -74,7 +74,7 @@ export default function Settings({ navigation }) {
           <ListItem
             bottomDivider
             onPress={() => {
-            //   navigation.navigate("BuyBTC");
+              navigation.navigate("HomeScreen");
             }}
           >
             <View
@@ -98,7 +98,7 @@ export default function Settings({ navigation }) {
           <ListItem
             bottomDivider
             onPress={() => {
-            //   navigation.navigate("BuyBTC");
+              navigation.navigate("SecuritySettings");
             }}
           >
             <View
@@ -115,6 +115,30 @@ export default function Settings({ navigation }) {
             </View>
             <ListItem.Content>
               <ListItem.Title>Security</ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Chevron />
+          </ListItem>
+
+          <ListItem
+            bottomDivider
+            onPress={() => {
+              navigation.navigate("Prices");
+            }}
+          >
+            <View
+              style={{
+                width: 40,
+                height: 40,
+                backgroundColor: "#E466DF",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 8,
+              }}
+            >
+              <Icon type="material-community" name="chart-line-stacked" color={"#FFF"} />
+            </View>
+            <ListItem.Content>
+              <ListItem.Title>Prices</ListItem.Title>
             </ListItem.Content>
             <ListItem.Chevron />
           </ListItem>

@@ -27,6 +27,13 @@ import Withdraw from "./src/screens/withdraw/Withdraw";
 import ConfirmAddress from "./src/screens/withdraw/ConfirmAddress";
 import WithdrawConfirmation from "./src/screens/withdraw/WithdrawConfirmation";
 import Settings from "./src/screens/settings/Settings";
+import SecuritySettings from "./src/screens/settings/security/SecuritySettings";
+import VerifyRecoveryPhrase from "./src/screens/settings/security/VerifyRecoveryPhrase";
+import YourRecoveryPhrase from "./src/screens/settings/security/YourRecoveryPhrase";
+import EnterPin from "./src/screens/settings/security/EnterPin";
+import Prices from "./src/screens/settings/Prices";
+import Activity from "./src/screens/activity/Activity";
+import ReferFriend from "./src/screens/refer/ReferFriend";
 
 const Stack = createNativeStackNavigator();
 
@@ -148,6 +155,41 @@ export default function App() {
           name="Settings"
           options={{ headerShown: false }}
           component={Settings}
+        />
+        <Stack.Screen
+          name="SecuritySettings"
+          options={{ headerShown: false }}
+          component={SecuritySettings}
+        />
+        <Stack.Screen
+          name="VerifyRecoveryPhrase"
+          options={{ headerShown: false }}
+          component={VerifyRecoveryPhrase}
+        />
+        <Stack.Screen
+          name="YourRecoveryPhrase"
+          options={{ headerShown: false }}
+          component={YourRecoveryPhrase}
+        />
+        <Stack.Screen
+          name="EnterPin"
+          options={{ headerShown: false }}
+          component={EnterPin}
+        />
+        <Stack.Screen
+          name="Prices"
+          options={{ headerShown: false }}
+          component={Prices}
+        />
+        <Stack.Screen
+          name="Activity"
+          options={{ headerShown: false }}
+          component={Activity}
+        />
+        <Stack.Screen
+          name="ReferFriend"
+          options={{ headerShown: false }}
+          component={ReferFriend}
         />
         {/* <StatusBar style="auto" /> */}
       </Stack.Navigator>
