@@ -22,6 +22,7 @@ import {
 } from "react-native-elements";
 const { width, height } = Dimensions.get("window");
 import DropDownPicker from "react-native-dropdown-picker";
+import BottomTabs from "../shared/BottomTabs";
 
 export default function Settings({ navigation }) {
   const [open, setOpen] = useState(false);
@@ -365,7 +366,9 @@ export default function Settings({ navigation }) {
             <ListItem.Chevron />
           </ListItem>
         </View>
+        <View style={{ marginBottom: 100, }}></View>
       </ScrollView>
+      <BottomTabs navigation={navigation} activeTab="settings" />
     </View>
   );
 }

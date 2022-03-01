@@ -809,7 +809,7 @@ export default function Activity({ navigation }) {
         </View>
       </Overlay>
 
-      <BottomTabs navigation={navigation} />
+      <BottomTabs navigation={navigation} activeTab="activity" />
     </View>
   );
 }

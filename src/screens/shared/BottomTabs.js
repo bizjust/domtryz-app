@@ -7,12 +7,30 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Icon, Text } from "react-native-elements";
 const { width, height } = Dimensions.get("window");
 
-export default function BottomTabs({ navigation }) {
+export default function BottomTabs({ navigation, activeTab }) {
+
+  const [cTab, setCTab] = useState("home");
+
+  useEffect(() => {
+    if(activeTab === undefined || activeTab === null)
+    {
+      setCTab("home");
+    }
+    else
+    {
+      setCTab(activeTab);
+    }
+    // console.log("active: ",activeTab);
+    // return () => {
+    //   effect
+    // };
+  }, [])
+
   return (
     <View
       style={{
@@ -30,11 +48,11 @@ export default function BottomTabs({ navigation }) {
       }}
     >
       <TouchableOpacity style={{ alignItems: "center", width: width / 6 }} onPress={()=>{ navigation.navigate("Activity"); }} >
-        <Icon type="material-community" name="clock" />
+        <Icon type="material-community" name="clock" color={(activeTab==="activity")?"#e234e3":"#000"} />
         <Text style={styles.tabsText}>Activity</Text>
       </TouchableOpacity>
       <TouchableOpacity style={{ alignItems: "center", width: width / 6 }} onPress={()=>{ navigation.navigate("ReferFriend"); }} >
-        <Icon type="font-awesome" name="user-plus" />
+        <Icon type="font-awesome" name="user-plus" color={(activeTab==="refer")?"#e234e3":"#000"} />
         <Text style={styles.tabsText}>Refer</Text>
       </TouchableOpacity>
       <TouchableOpacity style={{ alignItems: "center" }} onPress={()=>{ navigation.navigate("HomeScreen"); }}>
@@ -47,7 +65,7 @@ export default function BottomTabs({ navigation }) {
           navigation.navigate("Withdraw");
         }}
       >
-        <Icon type="material-community" name="credit-card-check" />
+        <Icon type="material-community" name="credit-card-check" color={(activeTab==="withdraw")?"#e234e3":"#000"} />
         <Text style={styles.tabsText}>Withdraw</Text>
       </TouchableOpacity>
       <TouchableOpacity
@@ -56,7 +74,7 @@ export default function BottomTabs({ navigation }) {
           navigation.navigate("Settings");
         }}
       >
-        <Icon type="material-community" name="cog" />
+        <Icon type="material-community" name="cog" color={(activeTab==="settings")?"#e234e3":"#000"} />
         <Text style={styles.tabsText}>Settings</Text>
       </TouchableOpacity>
     </View>

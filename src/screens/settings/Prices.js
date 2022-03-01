@@ -523,7 +523,7 @@ export default function Prices({ navigation }) {
         </View>
       </ScrollView>
 
-      <BottomTabs navigation={navigation} />
+      <BottomTabs navigation={navigation} activeTab="settings" />
     </View>
   );
 }

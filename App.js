@@ -34,6 +34,7 @@ import EnterPin from "./src/screens/settings/security/EnterPin";
 import Prices from "./src/screens/settings/Prices";
 import Activity from "./src/screens/activity/Activity";
 import ReferFriend from "./src/screens/refer/ReferFriend";
+import ReferralsDetails from "./src/screens/refer/ReferralsDetails";
 
 const Stack = createNativeStackNavigator();
 
@@ -190,6 +191,11 @@ export default function App() {
           name="ReferFriend"
           options={{ headerShown: false }}
           component={ReferFriend}
+        />
+        <Stack.Screen
+          name="ReferralsDetails"
+          options={{ headerShown: false }}
+          component={ReferralsDetails}
         />
         {/* <StatusBar style="auto" /> */}
       </Stack.Navigator>
