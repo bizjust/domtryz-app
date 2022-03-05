@@ -90,7 +90,7 @@ export default function Welcome({ navigation }) {
         </View>
       
       <View style={[styles.container, { height: 200 }]}>
-      <TouchableOpacity>
+      <TouchableOpacity style={{ paddingVertical: 12, }} onPress={() => { navigation.navigate("RegisterHome"); }}>
             <LinearGradient
             // Button Linear Gradient
             style={{ paddingVertical: 12, paddingHorizontal: 10, width: width - 50, borderRadius: 7, }}

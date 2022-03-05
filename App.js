@@ -5,6 +5,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Welcome from "./src/screens/Welcome";
+// Register
+import RegisterHome from "./src/screens/auth/login/register/RegisterHome";
+import RegisterForm from "./src/screens/auth/login/register/RegisterForm";
+import RegisterMobile from "./src/screens/auth/login/register/RegisterMobile";
+import RegisterVer from "./src/screens/auth/login/register/RegisterVer";
+import RegisterCode from "./src/screens/auth/login/register/RegisterCode";
+import RegisterDomtryz from "./src/screens/auth/login/register/RegisterDomtryz";
+// import RegisterPicker from "./src/screens/auth/login/register/RegisterPicker";
+// END Register
+
 import LoginHome from "./src/screens/auth/login/LoginHome";
 import LoginEmail from "./src/screens/auth/login/LoginEmail";
 import LoginPhone from "./src/screens/auth/login/LoginPhone";
@@ -35,18 +45,76 @@ import Prices from "./src/screens/settings/Prices";
 import Activity from "./src/screens/activity/Activity";
 import ReferFriend from "./src/screens/refer/ReferFriend";
 import ReferralsDetails from "./src/screens/refer/ReferralsDetails";
+import RegisterEnterPin from "./src/screens/auth/login/register/RegisterEnterPin";
+import RegisterRecoveryPhrase from "./src/screens/auth/login/register/RegisterRecoveryPhrase";
+import RegisterVerifyRecoveryPhrase from "./src/screens/auth/login/register/RegisterVerifyRecoveryPhrase";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
+  console.disableYellowBox = true;
+  
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="HomeScreen" >
+      <Stack.Navigator initialRouteName="Welcome" >
         <Stack.Screen
           name="Welcome"
           options={{ headerShown: false }}
           component={Welcome}
         />
+
+        <Stack.Screen
+          name="RegisterHome"
+          options={{ headerShown: false }}
+          component={RegisterHome}
+        />
+        <Stack.Screen
+          name="RegisterForm"
+          options={{ headerShown: false }}
+          component={RegisterForm}
+        />
+        <Stack.Screen
+          name="RegisterMobile"
+          options={{ headerShown: false }}
+          component={RegisterMobile}
+        />
+        <Stack.Screen
+          name="RegisterVer"
+          options={{ headerShown: false }}
+          component={RegisterVer}
+        />
+        <Stack.Screen
+          name="RegisterCode"
+          options={{ headerShown: false }}
+          component={RegisterCode}
+        />
+        <Stack.Screen
+          name="RegisterDomtryz"
+          options={{ headerShown: false }}
+          component={RegisterDomtryz}
+        />
+        <Stack.Screen
+          name="RegisterEnterPin"
+          options={{ headerShown: false }}
+          component={RegisterEnterPin}
+        />
+        <Stack.Screen
+          name="RegisterRecoveryPhrase"
+          options={{ headerShown: false }}
+          component={RegisterRecoveryPhrase}
+        />
+        <Stack.Screen
+          name="RegisterVerifyRecoveryPhrase"
+          options={{ headerShown: false }}
+          component={RegisterVerifyRecoveryPhrase}
+        />
+        {/* <Stack.Screen
+          name="RegisterPicker"
+          options={{ headerShown: false }}
+          component={RegisterPicker}
+        /> */}
+        
         <Stack.Screen
           name="LoginHome"
           options={{ headerShown: false }}

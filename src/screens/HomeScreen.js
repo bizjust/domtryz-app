@@ -22,6 +22,7 @@ import {
 
 import Layout from "./shared/Layout";
 
+
 export default function HomeScreen({ navigation }) {
   const data = {
     labels: ["January", "February", "March", "April", "May", "June"],
@@ -50,6 +51,7 @@ export default function HomeScreen({ navigation }) {
           paddingTop: 10,
         }}
       >
+
         <Text h4 style={{ textAlign: "center" }}>
           Markets
         </Text>

@@ -26,6 +26,8 @@ import {
 import BottomTabs from "../shared/BottomTabs";
 const { width, height } = Dimensions.get("window");
 
+import CustomSlider from "../shared/CustomSlider";
+
 export default function ReferFriend({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
@@ -67,6 +69,11 @@ export default function ReferFriend({ navigation }) {
       </LinearGradient>
       <ScrollView>
         <View style={{ padding: 10 }}>
+
+
+        {/* <CustomSlider /> */}
+
+
           <View
             style={{
               padding: 10,
