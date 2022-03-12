@@ -41,7 +41,7 @@ export default function SendBTC({ navigation }) {
             </Text>
           </View>
           <View>
-              <TouchableOpacity onPress={() => { navigation.navigate("ScanQR"); }} >
+              <TouchableOpacity onPress={() => { navigation.navigate("ConfirmSend"); }} >
                   <Text style={{ color: "#FFF" }}>Next</Text>
               </TouchableOpacity>
           </View>

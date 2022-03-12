@@ -1,5 +1,5 @@
 import {
-    Alert,
+  Alert,
   Dimensions,
   ScrollView,
   StatusBar,
@@ -13,8 +13,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Avatar, Icon, Input, ListItem, Text } from "react-native-elements";
 const { width, height } = Dimensions.get("window");
 import { BarCodeScanner } from "expo-barcode-scanner";
-import { Camera } from 'expo-camera';
-import { Ionicons } from '@expo/vector-icons';
+import { Camera } from "expo-camera";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function ScanQR({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -41,7 +41,7 @@ export default function ScanQR({ navigation }) {
 
   return (
     <View style={{ flex: 1 }}>
-    <StatusBar style="auto" backgroundColor={"#e234e3"} />
+      <StatusBar style="auto" backgroundColor={"#e234e3"} />
       <LinearGradient
         // Button Linear Gradient
         style={{ width: width, paddingVertical: 30, paddingHorizontal: 10 }}
@@ -79,7 +79,7 @@ export default function ScanQR({ navigation }) {
       </LinearGradient>
 
       <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
-        <Text>ScanQR</Text>
+        {/* <Text>ScanQR</Text> */}
         {/* <BarCodeScanner
           onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
           style={{ width: 400, height: 300, borderWidth: 5, }}
@@ -90,22 +90,114 @@ export default function ScanQR({ navigation }) {
             onPress={() => setScanned(false)}
           />
         )} */}
-        <View style={{ width: width, height: height, position:'relative', alignItems: 'center', justifyContent: 'center' }}>
-        <View style={{ width: 280, height: 280, borderRadius: 30, overflow: 'hidden' }}>
-            <Camera
-            onBarCodeScanned={(r)=> { navigation.navigate("SentBTC", { data:r }); console.log(r); }}
-            barCodeScannerSettings={{
-                barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr],
+        <View
+          style={{
+            width: width,
+            height: height,
+            position: "relative",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <View
+            style={{
+              width: 280,
+              height: 280,
+              borderRadius: 30,
+              alignItems: "center",
+              justifyContent: "center",
             }}
-            style={StyleSheet.absoluteFillObject}
+          >
+            <View
+              style={{
+                padding: 10,
+                width: 270,
+                height: 270,
+                borderRadius: 10,
+                overflow: "hidden",
+              }}
+            >
+              <Camera
+                onBarCodeScanned={(r) => {
+                  navigation.navigate("SentBTC", { data: r });
+                  console.log(r);
+                }}
+                barCodeScannerSettings={{
+                  barCodeTypes: [BarCodeScanner.Constants.BarCodeType.qr],
+                }}
+                style={StyleSheet.absoluteFillObject}
+              />
+            </View>
+            <View
+              style={{
+                borderColor: "#CCC",
+                borderWidth: 10,
+                width: 100,
+                height: 100,
+                position: "absolute",
+                top: 0,
+                left: 0,
+                borderRadius: 10,
+                borderRightWidth: 0,
+                borderBottomWidth: 0,
+                borderTopRightRadius: 0,
+                borderBottomLeftRadius: 0,
+              }}
             />
-        </View>
-        <Ionicons
-                  name="scan-outline"
-                  size={width * 1.07}
-                  color={"#CCC"}
-                  style={{ position: 'absolute', left: 0, width: width }}
-                />
+            <View
+              style={{
+                borderColor: "#CCC",
+                borderWidth: 10,
+                width: 100,
+                height: 100,
+                position: "absolute",
+                top: 0,
+                right: 0,
+                borderRadius: 10,
+                borderLeftWidth: 0,
+                borderBottomWidth: 0,
+                borderTopLeftRadius: 0,
+                borderBottomRightRadius: 0,
+              }}
+            />
+            <View
+              style={{
+                borderColor: "#CCC",
+                borderWidth: 10,
+                width: 100,
+                height: 100,
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                borderRadius: 10,
+                borderRightWidth: 0,
+                borderTopWidth: 0,
+                borderTopLeftRadius: 0,
+                borderBottomRightRadius: 0,
+              }}
+            />
+            <View
+              style={{
+                borderColor: "#CCC",
+                borderWidth: 10,
+                width: 100,
+                height: 100,
+                position: "absolute",
+                bottom: 0,
+                right: 0,
+                borderRadius: 5,
+                borderLeftWidth: 0,
+                borderTopWidth: 0,
+                borderTopRightRadius: 0,
+                borderBottomLeftRadius: 0,
+              }}
+            />
+          </View>
+          <View style={{ paddingVertical: 20 }}>
+            <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+              Be sure to only scan a BTC QR Code
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -113,9 +205,9 @@ export default function ScanQR({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    // 
-    absoluteFillObject: {
-        width: 300,
-        height: 300,
-    }
+  //
+  absoluteFillObject: {
+    width: 300,
+    height: 300,
+  },
 });
