@@ -17,6 +17,7 @@
     "@react-navigation/drawer": "^6.3.1",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
+    "@reduxjs/toolkit": "^1.8.0",
     "axios": "^0.26.0",
     "deepmerge": "^4.2.2",
     "expo": "~44.0.0",
@@ -25,6 +26,7 @@
     "expo-linear-gradient": "~11.0.3",
     "expo-status-bar": "~1.2.0",
     "expo-updates": "~0.11.6",
+    "install": "^0.13.0",
     "pinar": "^0.12.1",
     "react": "17.0.1",
     "react-dom": "17.0.1",
@@ -49,7 +51,9 @@
     "react-native-vector-icons": "^9.1.0",
     "react-native-web": "0.17.1",
     "react-native-webview": "11.15.0",
+    "react-redux": "^7.2.6",
     "reanimated-bottom-sheet": "^1.0.0-alpha.22",
+    "redux": "^4.1.2",
     "world-countries": "^4.0.0"
   },
   "devDependencies": {
