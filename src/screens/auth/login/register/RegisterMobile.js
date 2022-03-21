@@ -4,6 +4,10 @@ import { Icon, Input, Text } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
 import { Picker } from "react-native";
 export default function RegisterMobile({ navigation }) {
+
+  const next = async () => {
+    // navigation.navigate("RegisterCode");
+  }
   return (
     <View style={{ flex: 1, backgroundColor: "white" }}>
       <View
@@ -41,15 +45,12 @@ export default function RegisterMobile({ navigation }) {
               marginTop: 20,
             }}
           >
-            <TouchableOpacity>
+            <TouchableOpacity style={{ marginRight: 15, marginTop: 30, marginBottom: -20, zIndex: 99, }} onPress={()=>{ navigation.navigate("RegisterForm"); }} >
               <Text
                 style={{
                   color: "#e234e3",
                   fontWeight: "bold",
                   fontSize: 15,
-                  marginRight: 15,
-                  marginTop: 30,
-                  marginBottom: -20,
                 }}
               >
                 Register with email
@@ -107,8 +108,8 @@ export default function RegisterMobile({ navigation }) {
         <View style={{ alignItems: "flex-end" }}>
           <TouchableOpacity
             style={{  }}
-            onPress={() => {
-              navigation.navigate("RegisterCode");
+            onPress={async () => {
+              await next();
             }}
           >
             <LinearGradient

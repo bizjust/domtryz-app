@@ -55,7 +55,7 @@ const Stack = createNativeStackNavigator();
 export default function Nav() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Welcome" >
+      <Stack.Navigator initialRouteName="RegisterHome" >
         <Stack.Screen
           name="Welcome"
           options={{ headerShown: false }}

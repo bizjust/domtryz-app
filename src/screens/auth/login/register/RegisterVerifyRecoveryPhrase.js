@@ -22,10 +22,15 @@ import {
   Text,
 } from "react-native-elements";
 const { width, height } = Dimensions.get("window");
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Constants from "expo-constants";
+import axios from "axios";
+import { useDispatch } from "react-redux";
 
 export default function RegisterVerifyRecoveryPhrase({ navigation }) {
 
   const [phrase, setPhrase] = useState(["unable", "Photo", "hood", "tackle"]);
+  const [token, setToken] = useState("");
   const [phraseOptions, setPhraseOptions] = useState([
     "urge",
     "find",
@@ -39,6 +44,21 @@ export default function RegisterVerifyRecoveryPhrase({ navigation }) {
 
   const c1 = ["#e234e3", "#3e3477"];
   const c2 = ["#C0C0C0", "#C0C0C0"];
+
+  useEffect(async () => {
+    const t = await AsyncStorage.getItem("token");
+    setToken(t);
+  }, []);
+
+  const submit = async () => {
+    console.log("phrase", phrase.toString());
+    axios.post(Constants.manifest.extra.api_url + 'addPhrase', {
+      headers: {
+        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+      }
+    });
+    // navigation.navigate("RegisterRecoveryPhrase", { phrase: phrase });
+  }
 
   return (
     <View style={{ flex: 1 }}>
@@ -165,7 +185,7 @@ export default function RegisterVerifyRecoveryPhrase({ navigation }) {
           </View>
 
           <View style={{ paddingVertical: 30 }}>
-            <TouchableOpacity disabled={phraseOptions.length>0} onPress={()=>{ navigation.navigate("RegisterRecoveryPhrase", { phrase: phrase }); }} >
+            <TouchableOpacity disabled={phraseOptions.length>0} onPress={()=>{ submit(); }} >
               <LinearGradient
                 // Button Linear Gradient
                 style={{
