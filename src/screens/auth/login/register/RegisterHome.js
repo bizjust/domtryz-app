@@ -14,13 +14,11 @@ import React, { useEffect, useState } from "react";
 import { Text } from "react-native-elements";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/AntDesign";
-import { api_url } from "../../../../../app.json";
 import { useSelector, useDispatch } from 'react-redux';
 import { addRegisterCountry_id } from '../../../../store/slicers/userSlice';
+import { getCountries, getLoggedInUser } from "../../../../../http";
 
 const { width, height } = Dimensions.get("window");
-import Constants from "expo-constants";
-import axios from "axios";
 
 import {Picker} from '@react-native-picker/picker';
 
@@ -31,14 +29,47 @@ export default function RegisterHome({ navigation }) {
   const registerData = useSelector((state) => state.user.registerData);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const countries_url = Constants.manifest.extra.api_url + "countries";
-    console.log("API URL", countries_url);
-    axios.get(countries_url).then((res) => {
-      // console.log("res", res.data);
-      setCountries(res.data);
-      setLoading(false);
-    });
+  useEffect(async () => {
+    try {
+      // const token = await AsyncStorage.getItem("token");
+      // console.log("token", token);
+      let {data} = await getCountries();
+      setCountries(data);
+      let uData = await getLoggedInUser();
+      if(uData.data.success)
+      {
+        const user = uData.data.user;
+        // console.log("user", uData.data.user);
+        if(user.country_id > 0)
+        {
+          // console.log(user.verified);
+          if(user.verified ==="Yes")
+          {
+            if(user.phrase !== "" && user.phrase !== null)
+            {
+              navigation.navigate("HomeScreen");
+            }
+            else
+            {
+              navigation.navigate("RegisterVerifyRecoveryPhrase");
+            }
+          }
+          else
+          {
+            navigation.navigate("RegisterCode");
+          }
+        }
+        else
+        {
+          setLoading(false);
+        }
+      }
+      
+      // console.log("countries", data);
+    } catch (error) {
+      console.log("error", error);
+    }
+    
   }, []);
 
   const next = async () => {
@@ -50,7 +81,7 @@ export default function RegisterHome({ navigation }) {
 
   if (loading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
         <Text>Loading...</Text>
       </View>
     );

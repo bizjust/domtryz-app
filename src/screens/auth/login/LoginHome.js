@@ -1,10 +1,51 @@
 import { Dimensions, Image, StatusBar, StyleSheet, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Divider, Text } from 'react-native-elements'
 import { LinearGradient } from 'expo-linear-gradient'
+import { getLoggedInUser } from '../../../../http';
 const { width, height } = Dimensions.get("window");
 
 export default function LoginHome({navigation}) {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(async () => {
+    try {
+      const {data} = await getLoggedInUser();
+      if(data.success)
+      {
+        const user = data.user;
+        // console.log("user", uData.data.user);
+        if(user.country_id > 0)
+        {
+          // console.log(user.verified);
+          if(user.verified ==="Yes")
+          {
+            if(user.phrase !== "" && user.phrase !== null)
+            {
+              navigation.navigate("HomeScreen");
+            }
+            else
+            {
+              navigation.navigate("RegisterVerifyRecoveryPhrase");
+            }
+          }
+          else
+          {
+            navigation.navigate("RegisterCode");
+          }
+        }
+        else
+        {
+          setLoading(false);
+        }
+      }
+    } catch (error) {
+      // console.log("error", error);
+    }
+  }, []);
+
+
   return (
     <View style={{ flex:1, alignItems: 'center', justifyContent: 'space-between' }}>
         <View style={{ alignItems: 'center', paddingTop: 50, }}>
@@ -30,7 +71,7 @@ export default function LoginHome({navigation}) {
         </View>
 
 
-        <TouchableOpacity style={{ marginTop: 10, marginBottom: 40, }}>
+        <TouchableOpacity style={{ marginTop: 10, marginBottom: 40, }} onPress={()=> {navigation.navigate("LoginPhone")}}>
             <LinearGradient
             // Button Linear Gradient
             style={{ paddingVertical: 12, paddingHorizontal: 10, width: width - 50, borderRadius: 7, }}

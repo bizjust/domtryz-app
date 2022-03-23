@@ -12,8 +12,8 @@ import {
 } from "../../../../store/slicers/userSlice";
 import axios from "axios";
 import { Snackbar } from "react-native-paper";
-import Constants from "expo-constants";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getLoggedInUser, stepEmailPassword } from "../../../../../http";
 
 export default function RegisterForm({ navigation }) {
   const [email, setEmail] = useState("");
@@ -25,34 +25,57 @@ export default function RegisterForm({ navigation }) {
 
   useEffect(async () => {
     // console.log("RegisterForm", d);
-    console.log(await AsyncStorage.getItem("token"));
+    // console.log(await AsyncStorage.getItem("token"));
+    try {
+      let uData = await getLoggedInUser();
+      if(uData.data.success)
+      {
+        const user = uData.data.user;
+        // console.log("user", uData.data.user);
+        if(user.country_id > 0)
+        {
+          // console.log(user.verified);
+          if(user.verified ==="Yes")
+          {
+            if(user.phrase !== "" && user.phrase !== null)
+            {
+              navigation.navigate("HomeScreen");
+            }
+            else
+            {
+              navigation.navigate("RegisterVerifyRecoveryPhrase");
+            }
+          }
+          else
+          {
+            navigation.navigate("RegisterCode");
+          }
+        }
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+
   }, []);
 
   const next = async () => {
     // console.log("Email:",email, ", Password:", password);
     if (email !== "" && password !== "") {
-      await axios
-        .post(Constants.manifest.extra.api_url + "stepEmailPassword", {
-          email: email,
-          password: password,
-          country_id: d.country_id,
-        })
-        .then(async (res) => {
-          console.log("res", res);
-          dispatch(addRegisterEmail(email));
-          dispatch(addRegisterPassword(password));
-          if (res.data.success) {
-            console.log("Success", res.data.user);
-            console.log("Token", res.data.token);
-            // console.log(d);
-            await AsyncStorage.setItem("token", res.data.token);
-            dispatch(addUser(res.data.user));
-            navigation.navigate("RegisterCode");
-          } else {
-            console.log("Error", res);
-          }
-        }).catch((err) => { console.log("Error1", err); });
-
+      try {
+        const { data } = stepEmailPassword({ email, password });
+        if (data.success) {
+          console.log("Success", data.user);
+          console.log("Token", data.token);
+          // console.log(d);
+          await AsyncStorage.setItem("token", data.token);
+          dispatch(addUser(data.user));
+          navigation.navigate("RegisterCode");
+        } else {
+          console.log("Error", data);
+        }
+      } catch (error) {
+        console.log("error", error);
+      }
       
     } else {
       setSnackMeg("Please fill all fields");

@@ -9,14 +9,16 @@ import {
   SafeAreaView,
   PixelRatio,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 const { width, height } = Dimensions.get("window");
 import { LinearGradient } from 'expo-linear-gradient';
 import { Text } from "react-native-elements";
+import { getLoggedInUser } from "../../http";
 
 export default function Welcome({ navigation }) {
 
     const [sliderState, setSliderState] = useState({ currentPage: 0 });
+    const [loading, setLoading] = useState(true);
 
 
     const setSliderPage = (event) => {
@@ -32,6 +34,54 @@ export default function Welcome({ navigation }) {
       };
     
       const { currentPage: pageIndex } = sliderState;
+
+      useEffect(async () => {
+        
+        try {
+          let uData = await getLoggedInUser();
+          if(uData.data.success)
+          {
+            const user = uData.data.user;
+            // console.log("user", uData.data.user);
+            if(user.country_id > 0)
+            {
+              // console.log(user.verified);
+              if(user.verified ==="Yes")
+              {
+                if(user.phrase !== "" && user.phrase !== null)
+                {
+                  navigation.navigate("HomeScreen");
+                }
+                else
+                {
+                  navigation.navigate("RegisterVerifyRecoveryPhrase");
+                }
+              }
+              else
+              {
+                navigation.navigate("RegisterCode");
+              }
+            }
+            else
+            {
+              setLoading(false);
+            }
+          }
+          
+          // console.log("countries", data);
+        } catch (error) {
+          console.log("error", error);
+        }
+
+      }, []);
+
+  if(loading){
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
 
   return (
     <SafeAreaView style={{ flex: 1 }}>

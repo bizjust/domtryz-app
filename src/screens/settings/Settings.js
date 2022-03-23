@@ -23,6 +23,8 @@ import {
 const { width, height } = Dimensions.get("window");
 import DropDownPicker from "react-native-dropdown-picker";
 import BottomTabs from "../shared/BottomTabs";
+import { logout } from "../../../http";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Settings({ navigation }) {
   const [open, setOpen] = useState(false);
@@ -247,6 +249,35 @@ export default function Settings({ navigation }) {
             <View>
               <Switch value={false} color="#e234e3" />
             </View>
+          </ListItem>
+
+
+          <ListItem
+            bottomDivider
+            onPress={async () => {
+              const {data} = await logout();
+              if(data.success){
+                await AsyncStorage.removeItem('token');
+                navigation.navigate("LoginHome");
+              }
+            }}
+          >
+            <View
+              style={{
+                width: 40,
+                height: 40,
+                backgroundColor: "#E466DF",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: 8,
+              }}
+            >
+              <Icon type="material-community" name="logout" color={"#FFF"} />
+            </View>
+            <ListItem.Content>
+              <ListItem.Title>Logout</ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Chevron />
           </ListItem>
 
           <View

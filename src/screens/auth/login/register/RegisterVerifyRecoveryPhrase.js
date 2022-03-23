@@ -23,14 +23,14 @@ import {
 } from "react-native-elements";
 const { width, height } = Dimensions.get("window");
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Constants from "expo-constants";
-import axios from "axios";
 import { useDispatch } from "react-redux";
+import { addPhrase, getLoggedInUser } from "../../../../../http";
+import { addUser } from "../../../../store/slicers/userSlice";
 
 export default function RegisterVerifyRecoveryPhrase({ navigation }) {
 
   const [phrase, setPhrase] = useState(["unable", "Photo", "hood", "tackle"]);
-  const [token, setToken] = useState("");
+  const dispatch = useDispatch();
   const [phraseOptions, setPhraseOptions] = useState([
     "urge",
     "find",
@@ -46,17 +46,52 @@ export default function RegisterVerifyRecoveryPhrase({ navigation }) {
   const c2 = ["#C0C0C0", "#C0C0C0"];
 
   useEffect(async () => {
-    const t = await AsyncStorage.getItem("token");
-    setToken(t);
+
+    try {
+      let uData = await getLoggedInUser();
+      if(uData.data.success)
+      {
+        const u = uData.data.user;
+        // console.log("user", uData.data.user);
+        if(u.country_id > 0)
+        {
+          // console.log(u.verified);
+          if(u.verified ==="Yes")
+          {
+            if(u.phrase !== "" && u.phrase !== null)
+            {
+              navigation.navigate("HomeScreen");
+            }
+            else
+            {
+              // navigation.navigate("RegisterVerifyRecoveryPhrase");
+            }
+          }
+          else
+          {
+            navigation.navigate("RegisterCode");
+          }
+        }
+      }
+    } catch (error) {
+      console.log("error", error);
+    }
+
   }, []);
 
   const submit = async () => {
     console.log("phrase", phrase.toString());
-    axios.post(Constants.manifest.extra.api_url + 'addPhrase', {
-      headers: {
-        Authorization: 'Bearer ' + token //the token is a variable which holds the token
+    
+    try {
+      const {data} = await addPhrase({phrase: phrase.toString()});
+      if(data.success)
+      {
+        dispatch(addUser(data.user));
+        navigation.navigate("RegisterRecoveryPhrase", { phrase: phrase });
       }
-    });
+    } catch (error) {
+      console.log("error", error);
+    }
     // navigation.navigate("RegisterRecoveryPhrase", { phrase: phrase });
   }
 
