@@ -64,10 +64,15 @@ export default function RegisterHome({ navigation }) {
           setLoading(false);
         }
       }
+      else
+      {
+        setLoading(false);
+      }
       
       // console.log("countries", data);
     } catch (error) {
       console.log("error", error);
+      setLoading(false);
     }
     
   }, []);

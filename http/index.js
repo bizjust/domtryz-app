@@ -12,59 +12,52 @@ const api = axios.create({
   },
 });
 
-// List of all endpoints//loginMobile
-export const getCountries = (data) => api.get("/countries", data);
-export const getLoggedInUser = (data) => api.get("/user", data);
-export const stepEmailPassword = (data) => api.post("/stepEmailPassword", data);
-export const verifyUser = (data) => api.get("/verifyUser", data);
-export const addPhrase = (data) => api.post("/addPhrase", data);
-export const logout = (data) => api.get("/logout", data);
-export const loginWithEmail = (data) => api.post("/login", data);
-export const loginMobile = (data) => api.post("/loginMobile", data);
-
-// Set the AUTH token for any request
-api.interceptors.request.use(async function (config) {
-  const token = await AsyncStorage.getItem("token");
-  config.headers.Authorization = token ? `Bearer ${token}` : "";
-  return config;
+const api_token = axios.create({
+  baseURL: API_URL,
+  withCredentials: true,
+  headers: {
+    "Content-type": "application/json",
+    Accept: "application/json",
+  },
 });
 
-// Interceptors
-api.interceptors.response.use(
-  async (config) => {
-    // console.log('ok',config.data);
-    const { data } = config;
-    if (data.token) {
-      const token = await AsyncStorage.setItem("token", data.token);
-    }
-    return config;
+// List of all endpoints Without authorization bearer token
+export const getCountries = (data) => api.get("countries", data);
+export const stepEmailPassword = (data) => api.post("stepEmailPassword", data);
+export const loginWithEmail = (data) => api.post("login", data);
+export const loginMobile = (data) => api.post("loginMobile", data);
+
+// List of all endpoints with authorization bearer token
+export const verifyUser = (data) => api_token.post("verifyUser", data);
+export const getLoggedInUser = (data) => api_token.get("user", data);
+export const addPhrase = (data) => api_token.post("addPhrase", data);
+export const logout = (data) => api_token.get("logout", data);
+
+
+// Set the AUTH token for any request
+api_token.interceptors.request.use(async function (config) {
+  const token = await AsyncStorage.getItem("token");
+  // console.log("token", token);
+  config.headers.Authorization = token ? `Bearer ${token}` : "";
+  return config;
   },
-  async (error) => {
-    const originalRequest = error.config;
-    if (typeof error.response === "undefined") {
-      // do somthing
-      // console.log("ok");
-      return Promise.reject(error);
-    }
-    // console.log('e',error.response);
-    // return;
-    if (
-      error.response.status === 401 &&
-      originalRequest &&
-      !originalRequest._isRetry
-    ) {
-      originalRequest.isRetry = true;
-      try {
-        // console.log('ok');
-        const token = await AsyncStorage.getItem("token");
-        await AsyncStorage.setItem("token", data.token);
-        return api.request(originalRequest);
-      } catch (err) {
-        console.log("refresh", err.message);
-      }
-    }
+  (error) => {
+    // Do something with request error
     return Promise.reject(error);
-    // throw error;
+  }
+);
+
+
+
+// Interceptors
+api_token.interceptors.response.use(
+  (response) => { // Any status code from range of 2xx
+    // Do something with response data
+    return response;
+  },
+  (error) => { // Any status codes outside range of 2xx
+    // Do something with response error
+    return Promise.reject(error);
   }
 );
 

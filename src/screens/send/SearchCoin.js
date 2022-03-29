@@ -95,7 +95,7 @@ export default function SearchCoin({ navigation, params }) {
       <ScrollView>
         <View>
           {list.map((l, i) => (
-            <ListItem key={i} bottomDivider onPress={()=>{ navigation.navigate("SendBTC"); }} >
+            <ListItem key={i} bottomDivider onPress={()=>{ navigation.navigate("SendBTC", {coin:l}); }} >
               <Avatar source={l.avatar} />
               <ListItem.Content>
                 <ListItem.Title>{l.name}</ListItem.Title>

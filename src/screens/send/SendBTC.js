@@ -7,12 +7,16 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Avatar, Icon, Input, ListItem, Text } from "react-native-elements";
 const { width, height } = Dimensions.get("window");
 
-export default function SendBTC({ navigation }) {
+export default function SendBTC({ route, navigation }) {
+  const [adr,setAdr] = useState("");
+  useEffect(() => {
+    console.log(route.params.coin.name);
+  }, []);
   return (
     <View style={{ flex:1, }}>
     <StatusBar style="auto" backgroundColor={"#e234e3"} />
@@ -50,9 +54,9 @@ export default function SendBTC({ navigation }) {
       <View>
           <View style={{ backgroundColor: '#FFF', margin: 20, borderRadius: 10, }}>
               <View style={{ flexDirection:'row', borderBottomWidth:1, borderBottomColor:'#CCC', alignItems: 'center', paddingHorizontal: 10, justifyContent: 'space-between' }}>
-                <TextInput placeholder="Recipient Address" style={{ fontSize: 16, padding: 10, width: '70%' }} />
+                <TextInput placeholder="Recipient Address" value={adr} style={{ fontSize: 16, padding: 10, width: '70%' }} />
                 <Text style={{ marginRight: 10, color: '#e234e3', fontWeight: 'bold' }}>Paste</Text>
-                <Icon type="ant-design" name="scan1" style={{ marginRight: 10, }} color="#e234e3" />
+                <Icon type="ant-design" onPress={()=>{ setAdr("C5HqK2Dgu63TAhyU32nfE3Zr2d9RGHJJnQ"); }} name="scan1" style={{ marginRight: 10, }} color="#e234e3" />
               </View>
               <View style={{ flexDirection:'row', alignItems: 'center', paddingHorizontal: 10, justifyContent: 'space-between' }}>
                 <TextInput placeholder="USD Address" style={{ fontSize: 16, padding: 10, width: '70%' }} />

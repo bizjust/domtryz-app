@@ -28,7 +28,7 @@
       "favicon": "./assets/favicon.png"
     },
     "extra": {
-      "api_url": "http://192.168.1.196/dtadmin/public/api/"
+      "api_url": "http://192.168.10.106/dtadmin/public/api/"
     }
   }
 }

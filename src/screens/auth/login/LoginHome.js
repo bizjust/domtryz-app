@@ -40,8 +40,13 @@ export default function LoginHome({navigation}) {
           setLoading(false);
         }
       }
+      else
+      {
+        setLoading(false);
+      }
     } catch (error) {
       // console.log("error", error);
+      setLoading(false);
     }
   }, []);
 

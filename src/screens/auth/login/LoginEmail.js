@@ -46,8 +46,13 @@ export default function LoginEmail({ navigation }) {
           setLoading(false);
         }
       }
+      else
+      {
+        setLoading(false);
+      }
     } catch (error) {
       // console.log("error", error);
+      setLoading(false);
     }
   }, []);
 

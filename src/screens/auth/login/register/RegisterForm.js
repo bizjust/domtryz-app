@@ -28,6 +28,7 @@ export default function RegisterForm({ navigation }) {
     // console.log(await AsyncStorage.getItem("token"));
     try {
       let uData = await getLoggedInUser();
+      console.log("lo",uData);
       if(uData.data.success)
       {
         const user = uData.data.user;
@@ -61,11 +62,13 @@ export default function RegisterForm({ navigation }) {
   const next = async () => {
     // console.log("Email:",email, ", Password:", password);
     if (email !== "" && password !== "") {
+      // console.log(d);
       try {
-        const { data } = stepEmailPassword({ email, password });
+        const {data} = await stepEmailPassword({ email:email, password:password, country_id: d.country_id });
+        console.log("reg",data);
         if (data.success) {
           console.log("Success", data.user);
-          console.log("Token", data.token);
+          // console.log("Token", data.token);
           // console.log(d);
           await AsyncStorage.setItem("token", data.token);
           dispatch(addUser(data.user));

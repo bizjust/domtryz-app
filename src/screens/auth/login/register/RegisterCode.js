@@ -54,10 +54,14 @@ export default function RegisterCode({ navigation }) {
     console.log("Code:", code, user.verify_code);
     if(Number(user.verify_code) === Number(code)){
       try {
-        const {data} = await verifyUser();
-        dispatch(addUser(data.user));
+        const {data} = await verifyUser({ code: code });
+        if(data.success)
+        {
+          dispatch(addUser(data.user));
+          navigation.navigate("RegisterVerifyRecoveryPhrase");
+        }
       } catch (error) {
-        console.log("error", error);
+        console.log("error1", error);
       }
     } else {
       alert("Wrong Code");
@@ -103,13 +107,13 @@ export default function RegisterCode({ navigation }) {
                 paddingBottom: 10,
               }}
             >
-              Code will be sent to +1256*****522.
+              Enter Verification Code.
             </Text>
           </View>
           <Input
             style={{ paddingLeft: 10, paddingRight: 10, paddingBottom: 18 }}
-            placeholder="Mobile verification code"
-            textContentType="mobile number"
+            placeholder="verification code"
+            textContentType="telephoneNumber"
             inputStyle={{
               backgroundColor: "#e0e0e0",
               padding: 10,
@@ -120,7 +124,7 @@ export default function RegisterCode({ navigation }) {
             inputContainerStyle={{ borderBottomWidth: 0 }}
             onChangeText={(text) => { setCode(text); }}
           />
-          <TouchableOpacity>
+          {/* <TouchableOpacity>
             <Text
               style={{
                 color: "#e234e3",
@@ -131,7 +135,7 @@ export default function RegisterCode({ navigation }) {
             >
               Voice Verification
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View>
             <View style={{ paddingHorizontal: 10 }}>
               <TouchableOpacity
