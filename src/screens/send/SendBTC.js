@@ -54,7 +54,7 @@ export default function SendBTC({ route, navigation }) {
       <View>
           <View style={{ backgroundColor: '#FFF', margin: 20, borderRadius: 10, }}>
               <View style={{ flexDirection:'row', borderBottomWidth:1, borderBottomColor:'#CCC', alignItems: 'center', paddingHorizontal: 10, justifyContent: 'space-between' }}>
-                <TextInput placeholder="Recipient Address" value={adr} style={{ fontSize: 16, padding: 10, width: '70%' }} />
+                <TextInput placeholder="Recipient Address" onChangeText={(val)=>setAdr(val)} value={adr} style={{ fontSize: 16, padding: 10, width: '70%' }} />
                 <Text style={{ marginRight: 10, color: '#e234e3', fontWeight: 'bold' }}>Paste</Text>
                 <Icon type="ant-design" onPress={()=>{ setAdr("C5HqK2Dgu63TAhyU32nfE3Zr2d9RGHJJnQ"); }} name="scan1" style={{ marginRight: 10, }} color="#e234e3" />
               </View>

@@ -96,7 +96,7 @@ export default function SearchBuy({navigation}) {
       <ScrollView>
         <View>
           {list.map((l, i) => (
-            <ListItem key={i} bottomDivider onPress={()=>{ navigation.navigate("BuyBTC"); }} >
+            <ListItem key={i} bottomDivider onPress={()=>{ navigation.navigate("BuyBTC", {coin: l}); }} >
               <Avatar source={l.avatar} />
               <ListItem.Content>
                 <ListItem.Title>{l.name}</ListItem.Title>

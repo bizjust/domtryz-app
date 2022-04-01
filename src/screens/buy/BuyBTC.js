@@ -13,8 +13,28 @@ import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Avatar, Icon, Input, ListItem, Text } from "react-native-elements";
 const { width, height } = Dimensions.get("window");
+import RampSdk from '@ramp-network/react-native-sdk';
 
-export default function BuyBTC({ navigation }) {
+export default function BuyBTC({ route, navigation }) {
+
+  const ramp = new RampSdk({
+    url: 'https://ri-widget-staging.firebaseapp.com',
+    hostAppName: 'React Native Example',
+    hostLogoUrl: 'https://rampnetwork.github.io/assets/misc/test-logo.png',
+  }).on('*', (event) => {
+    console.log('ok');
+    console.log(`RampSdk.on('*')`, event);
+  });
+
+  useEffect(() => {
+    console.log(route.params.coin);
+  }, []);
+
+  const submit = async () => {
+    // navigation.navigate("Providers", { amount: 250.00 });
+    ramp.show();
+  }
+  
   return (
     <View style={{ flex: 1 }}>
     <StatusBar style="auto" backgroundColor={"#e234e3"} />
@@ -146,7 +166,7 @@ export default function BuyBTC({ navigation }) {
           </View>
 
           <View style={{ alignItems: 'center', paddingVertical: 30, }}>
-            <TouchableOpacity onPress={()=> { navigation.navigate("Providers", { amount: 250.00 }); }} >
+            <TouchableOpacity onPress={()=> { submit(); }} >
               <LinearGradient
                 // Button Linear Gradient
                 style={{
