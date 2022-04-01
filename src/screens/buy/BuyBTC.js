@@ -27,12 +27,14 @@ export default function BuyBTC({ route, navigation }) {
   });
 
   useEffect(() => {
+    console.log(ramp);
     console.log(route.params.coin);
   }, []);
 
   const submit = async () => {
     // navigation.navigate("Providers", { amount: 250.00 });
-    ramp.show();
+    console.log("Ramp: ", ramp);
+    await ramp?.show();
   }
   
   return (
