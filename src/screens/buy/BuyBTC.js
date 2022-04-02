@@ -32,9 +32,9 @@ export default function BuyBTC({ route, navigation }) {
   }, []);
 
   const submit = async () => {
-    // navigation.navigate("Providers", { amount: 250.00 });
+    navigation.navigate("Providers", { amount: 250.00 });
     console.log("Ramp: ", ramp);
-    await ramp?.show();
+    // await ramp?.show();
   }
   
   return (
