@@ -7,7 +7,7 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Icon, Text } from "react-native-elements";
 const { width, height } = Dimensions.get("window");
@@ -21,6 +21,7 @@ import {
 } from "react-native-chart-kit";
 
 import Layout from "./shared/Layout";
+import axios from "axios";
 
 
 export default function HomeScreen({ navigation }) {
@@ -40,6 +41,34 @@ export default function HomeScreen({ navigation }) {
     labelColor: (opacity = 0) => `rgba(0, 0, 0, ${opacity})`,
     stackedBar: false,
   };
+
+  const [loading, setLoading] = useState(true);
+  const [dataSource, setDataSource] = useState([]);
+
+  useEffect(async () => {
+    try {
+      const { data } = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&page=1&per_page=20');
+      setDataSource(data);
+      console.log(data);
+      setLoading(false);
+    } catch (error) {
+      console.log("error", error);
+      setLoading(false);
+    }
+    // return () => {
+    //   effect
+    // };
+  }, [])
+
+  if(loading) {
+    return (
+      <Layout navigation={navigation}>
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center", backgroundColor: '#FFF', }}>
+          <Text>Loading...</Text>
+        </View>
+      </Layout>
+    )
+  }
 
   return (
     <Layout navigation={navigation}>
@@ -84,175 +113,12 @@ export default function HomeScreen({ navigation }) {
             </View>
           </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              borderBottomWidth: 0,
-              borderTopWidth: 0,
-              paddingVertical: 7,
-            }}
-          >
-            <View style={{ width: "20%" }}>
-              <View>
-                <Image
-                  source={require("../../assets/images/bnb.png")}
-                  resizeMode="contain"
-                  style={{ width: 40, height: 40 }}
-                />
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", height: 60, width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold" }}>BNB</Text>
-                <Text style={{ color: "#999" }}>BNB</Text>
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", width: "40%", height: 60 }}>
-              <View>
-                <LineChart
-                  data={data}
-                  width={130}
-                  height={40}
-                  chartConfig={chartConfig}
-                  transparent={true}
-                  bezier={true}
-                  fromZero={true}
-                  withHorizontalLabels={false}
-                  withVerticalLabels={false}
-                  withDots={true}
-                  style={{ paddingRight: 0 }}
-                  hideLegend={true}
-                  withHorizontalLines={false}
-                  withVerticalLines={false}
-                  withShadow={false}
-                />
-              </View>
-            </View>
-            <View style={{ width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                  $410.09
-                </Text>
-                <Text style={{ textAlign: "right", color: "#0099CC" }}>
-                  +10.72%
-                </Text>
-              </View>
-            </View>
-          </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              borderBottomWidth: 0,
-              borderTopWidth: 0,
-              paddingVertical: 7,
-            }}
-          >
-            <View style={{ width: "20%" }}>
-              <View>
-                <Image
-                  source={require("../../assets/images/bnb.png")}
-                  resizeMode="contain"
-                  style={{ width: 40, height: 40 }}
-                />
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", height: 60, width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold" }}>BNB</Text>
-                <Text style={{ color: "#999" }}>BNB</Text>
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", width: "40%", height: 60 }}>
-              <View>
-                <LineChart
-                  data={data}
-                  width={130}
-                  height={40}
-                  chartConfig={chartConfig}
-                  transparent={true}
-                  bezier={true}
-                  fromZero={true}
-                  withHorizontalLabels={false}
-                  withVerticalLabels={false}
-                  withDots={true}
-                  style={{ paddingRight: 0 }}
-                  hideLegend={true}
-                  withHorizontalLines={false}
-                  withVerticalLines={false}
-                  withShadow={false}
-                />
-              </View>
-            </View>
-            <View style={{ width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                  $410.09
-                </Text>
-                <Text style={{ textAlign: "right", color: "#0099CC" }}>
-                  +10.72%
-                </Text>
-              </View>
-            </View>
-          </View>
 
-          <View
-            style={{
-              flexDirection: "row",
-              borderBottomWidth: 0,
-              borderTopWidth: 0,
-              paddingVertical: 7,
-            }}
-          >
-            <View style={{ width: "20%" }}>
-              <View>
-                <Image
-                  source={require("../../assets/images/bnb.png")}
-                  resizeMode="contain"
-                  style={{ width: 40, height: 40 }}
-                />
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", height: 60, width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold" }}>BNB</Text>
-                <Text style={{ color: "#999" }}>BNB</Text>
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", width: "40%", height: 60 }}>
-              <View>
-                <LineChart
-                  data={data}
-                  width={130}
-                  height={40}
-                  chartConfig={chartConfig}
-                  transparent={true}
-                  bezier={true}
-                  fromZero={true}
-                  withHorizontalLabels={false}
-                  withVerticalLabels={false}
-                  withDots={true}
-                  style={{ paddingRight: 0 }}
-                  hideLegend={true}
-                  withHorizontalLines={false}
-                  withVerticalLines={false}
-                  withShadow={false}
-                />
-              </View>
-            </View>
-            <View style={{ width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                  $410.09
-                </Text>
-                <Text style={{ textAlign: "right", color: "#0099CC" }}>
-                  +10.72%
-                </Text>
-              </View>
-            </View>
-          </View>
 
-          <View
+          {dataSource.map((item, index) => {
+            return (<View
+            key={index}
             style={{
               flexDirection: "row",
               borderBottomWidth: 0,
@@ -263,7 +129,7 @@ export default function HomeScreen({ navigation }) {
             <View style={{ width: "20%" }}>
               <View>
                 <Image
-                  source={require("../../assets/images/bnb.png")}
+                  source={{uri: item.image}}
                   resizeMode="contain"
                   style={{ width: 40, height: 40 }}
                 />
@@ -271,15 +137,15 @@ export default function HomeScreen({ navigation }) {
             </View>
             <View style={{ flexDirection: "column", height: 60, width: "20%" }}>
               <View>
-                <Text style={{ fontWeight: "bold" }}>BNB</Text>
-                <Text style={{ color: "#999" }}>BNB</Text>
+                <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
+                <Text style={{ color: "#999" }}>{item.symbol}</Text>
               </View>
             </View>
-            <View style={{ flexDirection: "column", width: "40%", height: 60 }}>
+            <View style={{ flexDirection: "column", width: "30%", height: 60 }}>
               <View>
                 <LineChart
                   data={data}
-                  width={130}
+                  width={110}
                   height={40}
                   chartConfig={chartConfig}
                   transparent={true}
@@ -296,185 +162,33 @@ export default function HomeScreen({ navigation }) {
                 />
               </View>
             </View>
-            <View style={{ width: "20%" }}>
+            <View style={{ width: "30%" }}>
               <View>
-                <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                  $410.09
+                <Text style={{ fontWeight: "bold", fontSize: 18, textAlign: 'right' }}>
+                  {'$'+item.current_price}
                 </Text>
                 <Text style={{ textAlign: "right", color: "#0099CC" }}>
-                  +10.72%
+                  {item.price_change_percentage_24h}%
                 </Text>
               </View>
             </View>
-          </View>
+          </View>)
+          })}
 
-          <View
-            style={{
-              flexDirection: "row",
-              borderBottomWidth: 0,
-              borderTopWidth: 0,
-              paddingVertical: 7,
-            }}
-          >
-            <View style={{ width: "20%" }}>
-              <View>
-                <Image
-                  source={require("../../assets/images/bnb.png")}
-                  resizeMode="contain"
-                  style={{ width: 40, height: 40 }}
-                />
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", height: 60, width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold" }}>BNB</Text>
-                <Text style={{ color: "#999" }}>BNB</Text>
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", width: "40%", height: 60 }}>
-              <View>
-                <LineChart
-                  data={data}
-                  width={130}
-                  height={40}
-                  chartConfig={chartConfig}
-                  transparent={true}
-                  bezier={true}
-                  fromZero={true}
-                  withHorizontalLabels={false}
-                  withVerticalLabels={false}
-                  withDots={true}
-                  style={{ paddingRight: 0 }}
-                  hideLegend={true}
-                  withHorizontalLines={false}
-                  withVerticalLines={false}
-                  withShadow={false}
-                />
-              </View>
-            </View>
-            <View style={{ width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                  $410.09
-                </Text>
-                <Text style={{ textAlign: "right", color: "#0099CC" }}>
-                  +10.72%
-                </Text>
-              </View>
-            </View>
-          </View>
+          
 
-          <View
-            style={{
-              flexDirection: "row",
-              borderBottomWidth: 0,
-              borderTopWidth: 0,
-              paddingVertical: 7,
-            }}
-          >
-            <View style={{ width: "20%" }}>
-              <View>
-                <Image
-                  source={require("../../assets/images/bnb.png")}
-                  resizeMode="contain"
-                  style={{ width: 40, height: 40 }}
-                />
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", height: 60, width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold" }}>BNB</Text>
-                <Text style={{ color: "#999" }}>BNB</Text>
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", width: "40%", height: 60 }}>
-              <View>
-                <LineChart
-                  data={data}
-                  width={130}
-                  height={40}
-                  chartConfig={chartConfig}
-                  transparent={true}
-                  bezier={true}
-                  fromZero={true}
-                  withHorizontalLabels={false}
-                  withVerticalLabels={false}
-                  withDots={true}
-                  style={{ paddingRight: 0 }}
-                  hideLegend={true}
-                  withHorizontalLines={false}
-                  withVerticalLines={false}
-                  withShadow={false}
-                />
-              </View>
-            </View>
-            <View style={{ width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                  $410.09
-                </Text>
-                <Text style={{ textAlign: "right", color: "#0099CC" }}>
-                  +10.72%
-                </Text>
-              </View>
-            </View>
-          </View>
+          
 
-          <View
-            style={{
-              flexDirection: "row",
-              borderBottomWidth: 0,
-              borderTopWidth: 0,
-              paddingVertical: 7,
-            }}
-          >
-            <View style={{ width: "20%" }}>
-              <View>
-                <Image
-                  source={require("../../assets/images/bnb.png")}
-                  resizeMode="contain"
-                  style={{ width: 40, height: 40 }}
-                />
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", height: 60, width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold" }}>BNB</Text>
-                <Text style={{ color: "#999" }}>BNB</Text>
-              </View>
-            </View>
-            <View style={{ flexDirection: "column", width: "40%", height: 60 }}>
-              <View>
-                <LineChart
-                  data={data}
-                  width={130}
-                  height={40}
-                  chartConfig={chartConfig}
-                  transparent={true}
-                  bezier={true}
-                  fromZero={true}
-                  withHorizontalLabels={false}
-                  withVerticalLabels={false}
-                  withDots={true}
-                  style={{ paddingRight: 0 }}
-                  hideLegend={true}
-                  withHorizontalLines={false}
-                  withVerticalLines={false}
-                  withShadow={false}
-                />
-              </View>
-            </View>
-            <View style={{ width: "20%" }}>
-              <View>
-                <Text style={{ fontWeight: "bold", fontSize: 18 }}>
-                  $410.09
-                </Text>
-                <Text style={{ textAlign: "right", color: "#0099CC" }}>
-                  +10.72%
-                </Text>
-              </View>
-            </View>
-          </View>
+          
+
+          
+
+          
+
+          
+
+
+
         </View>
       </ScrollView>
     </Layout>

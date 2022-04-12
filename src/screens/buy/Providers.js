@@ -13,8 +13,21 @@ import React, { useEffect, useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import { Avatar, Icon, Input, ListItem, Text } from "react-native-elements";
 const { width, height } = Dimensions.get("window");
+import RampSdk from '@ramp-network/react-native-sdk';
+import { InAppBrowser } from 'react-native-inappbrowser-reborn';
+import { getDeepLink } from '../shared/utilities';
 
 export default function Providers({ route, navigation }) {
+
+  const ramp = new RampSdk({
+    url: 'https://ri-widget-staging.firebaseapp.com',
+    hostAppName: 'React Native Example',
+    hostLogoUrl: 'https://rampnetwork.github.io/assets/misc/test-logo.png',
+  }).on('*', (event) => {
+    console.log('ok');
+    console.log(`RampSdk.on('*')`, event);
+  });
+
   return (
     <View style={{ flex: 1 }}>
     <StatusBar style="auto" backgroundColor={"#e234e3"} />
@@ -72,7 +85,7 @@ export default function Providers({ route, navigation }) {
             </View>
           </ListItem>
 
-          <ListItem style={{ width: width }} bottomDivider onPress={() => {}}>
+          <ListItem style={{ width: width }} bottomDivider onPress={async () => await ramp?.show()}>
             <Avatar source={require("../../../assets/images/ramp.jpg")} />
             <ListItem.Content>
               <ListItem.Title>Ramp</ListItem.Title>
@@ -82,7 +95,13 @@ export default function Providers({ route, navigation }) {
             </View>
           </ListItem>
 
-          <ListItem style={{ width: width }} bottomDivider onPress={() => {}}>
+          <ListItem style={{ width: width }} bottomDivider onPress={async () => {
+            try {
+              await InAppBrowser.open("https://www.google.com");
+            } catch (error) {
+              console.log("error", error);
+            }
+          }}>
             <Avatar source={require("../../../assets/images/mercuryo.png")} />
             <ListItem.Content>
               <ListItem.Title>Mercuryo</ListItem.Title>

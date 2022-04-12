@@ -27,6 +27,7 @@ export const stepEmailPassword = (data) => api.post("stepEmailPassword", data);
 export const loginWithEmail = (data) => api.post("login", data);
 export const loginMobile = (data) => api.post("loginMobile", data);
 
+
 // List of all endpoints with authorization bearer token
 export const verifyUser = (data) => api_token.post("verifyUser", data);
 export const getLoggedInUser = (data) => api_token.get("user", data);
