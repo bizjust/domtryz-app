@@ -33,6 +33,7 @@ export const verifyUser = (data) => api_token.post("verifyUser", data);
 export const getLoggedInUser = (data) => api_token.get("user", data);
 export const addPhrase = (data) => api_token.post("addPhrase", data);
 export const logout = (data) => api_token.get("logout", data);
+export const investmentPlans = (data) => api_token.post("investmentPlans", data);
 
 
 // Set the AUTH token for any request

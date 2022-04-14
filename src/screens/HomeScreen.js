@@ -49,7 +49,7 @@ export default function HomeScreen({ navigation }) {
     try {
       const { data } = await axios.get('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&page=1&per_page=20');
       setDataSource(data);
-      console.log(data);
+      // console.log(data);
       setLoading(false);
     } catch (error) {
       console.log("error", error);
